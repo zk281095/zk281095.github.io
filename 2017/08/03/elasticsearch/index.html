@@ -15,7 +15,7 @@
 <meta property="og:url" content="http://zk281095.github.io/2017/08/03/elasticsearch/index.html">
 <meta property="og:site_name" content="myBlog">
 <meta property="og:description" content="elasticsearch 使用中遇到的小问题删除更新问题在删除一个id的数据后，_search还是可以搜索到相关的数据，但是get却无法在提取删除后的数据。可以理解原因如下：删除一个文档也不会立即从磁盘上移除，它只是被标记成已删除。Elasticsearch将会在你之后添加更多索引的时候才会在后台进行删除内容的清理。但是在这个情况下具体什么情况可以获取，我还不确定。不过删除的目的就是让其不备索引">
-<meta property="og:updated_time" content="2017-08-03T06:58:52.673Z">
+<meta property="og:updated_time" content="2017-08-03T07:01:47.401Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="elasticsearch初识">
 <meta name="twitter:description" content="elasticsearch 使用中遇到的小问题删除更新问题在删除一个id的数据后，_search还是可以搜索到相关的数据，但是get却无法在提取删除后的数据。可以理解原因如下：删除一个文档也不会立即从磁盘上移除，它只是被标记成已删除。Elasticsearch将会在你之后添加更多索引的时候才会在后台进行删除内容的清理。但是在这个情况下具体什么情况可以获取，我还不确定。不过删除的目的就是让其不备索引">
@@ -224,8 +224,17 @@
 <blockquote>
 <p>一条过滤语句会询问每个文档的字段值是否包含着特定值：</p>
 <blockquote>
-<p>created 的日期范围是否在 2013 到 2014 ?<br>status 字段中是否包含单词 “published” ?<br>lat_lon 字段中的地理位置与目标点相距是否不超过10km ?<br>一条查询语句与过滤语句相似，但问法不同：<br>查询语句会询问每个文档的字段值与特定值的匹配程度如何？<br>查询语句的典型用法是为了找到文档：<br>查找与 full text search 这个词语最佳匹配的文档<br>查找包含单词 run ，但是也包含runs, running, jog 或 sprint的文档<br>同时包含着 quick, brown 和 fox — 单词间离得越近，该文档的相关性越高<br>标识着 lucene, search 或 java — 标识词越多，该文档的相关性越高<br>一条查询语句会计算每个文档与查询语句的相关性，会给出一个相关性评分 _score，并且 按照相关性对匹配到的文档进行排序。 这种评分方式非常适用于一个没有完全配置结果的全文本搜索。</p>
+<p>created 的日期范围是否在 2013 到 2014 ?<br>status 字段中是否包含单词 “published” ?<br>lat_lon 字段中的地理位置与目标点相距是否不超过10km ?</p>
 </blockquote>
+<p>一条查询语句与过滤语句相似，但问法不同：</p>
+<blockquote>
+<p>查询语句会询问每个文档的字段值与特定值的匹配程度如何？</p>
+</blockquote>
+<p>查询语句的典型用法是为了找到文档：</p>
+<blockquote>
+<p>查找与 full text search 这个词语最佳匹配的文档<br>查找包含单词 run ，但是也包含runs, running, jog 或 sprint的文档<br>同时包含着 quick, brown 和 fox — 单词间离得越近，该文档的相关性越高<br>标识着 lucene, search 或 java — 标识词越多，该文档的相关性越高</p>
+</blockquote>
+<p>一条查询语句会计算每个文档与查询语句的相关性，会给出一个相关性评分 _score，并且 按照相关性对匹配到的文档进行排序。 这种评分方式非常适用于一个没有完全配置结果的全文本搜索。</p>
 </blockquote>
 
       
