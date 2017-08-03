@@ -1,0 +1,300 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="utf-8">
+  
+  <title>elasticsearch初识 | Kai&#39;sBlog</title>
+
+  <!-- keywords -->
+  
+
+  <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+  <meta name="description" content="elasticsearch 使用中遇到的小问题删除更新问题在删除一个id的数据后，_search还是可以搜索到相关的数据，但是get却无法在提取删除后的数据。可以理解原因如下：删除一个文档也不会立即从磁盘上移除，它只是被标记成已删除。Elasticsearch将会在你之后添加更多索引的时候才会在后台进行删除内容的清理。但是在这个情况下具体什么情况可以获取，我还不确定。不过删除的目的就是让其不备索引">
+<meta property="og:type" content="article">
+<meta property="og:title" content="elasticsearch初识">
+<meta property="og:url" content="http://zk281095.github.io/2017/08/08/elasticsearch/index.html">
+<meta property="og:site_name" content="Kai&#39;sBlog">
+<meta property="og:description" content="elasticsearch 使用中遇到的小问题删除更新问题在删除一个id的数据后，_search还是可以搜索到相关的数据，但是get却无法在提取删除后的数据。可以理解原因如下：删除一个文档也不会立即从磁盘上移除，它只是被标记成已删除。Elasticsearch将会在你之后添加更多索引的时候才会在后台进行删除内容的清理。但是在这个情况下具体什么情况可以获取，我还不确定。不过删除的目的就是让其不备索引">
+<meta property="og:updated_time" content="2017-08-03T07:11:08.885Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="elasticsearch初识">
+<meta name="twitter:description" content="elasticsearch 使用中遇到的小问题删除更新问题在删除一个id的数据后，_search还是可以搜索到相关的数据，但是get却无法在提取删除后的数据。可以理解原因如下：删除一个文档也不会立即从磁盘上移除，它只是被标记成已删除。Elasticsearch将会在你之后添加更多索引的时候才会在后台进行删除内容的清理。但是在这个情况下具体什么情况可以获取，我还不确定。不过删除的目的就是让其不备索引">
+  
+    <link rel="alternative" href="/atom.xml" title="Kai&#39;sBlog" type="application/atom+xml">
+  
+  
+    <link rel="icon" href="https://gss0.baidu.com/-Po3dSag_xI4khGko9WTAnF6hhy/zhidao/pic/item/4afbfbedab64034f236c6fd6adc379310b551db8.jpg">
+  
+  <link rel="stylesheet" href="/css/style.css">
+  
+  
+
+  <script src="//cdn.bootcss.com/require.js/2.3.2/require.min.js"></script>
+  <script src="//cdn.bootcss.com/jquery/3.1.1/jquery.min.js"></script>
+
+  
+</head>
+<body>
+  <div id="container">
+    <div id="particles-js"></div>
+    <div class="left-col">
+    <div class="overlay"></div>
+<div class="intrude-less">
+	<header id="header" class="inner">
+		<a href="/" class="profilepic">
+			
+			<img lazy-src="https://gss0.baidu.com/-Po3dSag_xI4khGko9WTAnF6hhy/zhidao/pic/item/4afbfbedab64034f236c6fd6adc379310b551db8.jpg" class="js-avatar">
+			
+		</a>
+
+		<hgroup>
+		  <h1 class="header-author"><a href="/">Kai</a></h1>
+		</hgroup>
+
+		
+
+		
+			<div class="switch-btn">
+				<div class="icon">
+					<div class="icon-ctn">
+						<div class="icon-wrap icon-house" data-idx="0">
+							<div class="birdhouse"></div>
+							<div class="birdhouse_holes"></div>
+						</div>
+						<div class="icon-wrap icon-ribbon hide" data-idx="1">
+							<div class="ribbon"></div>
+						</div>
+						
+						<div class="icon-wrap icon-link hide" data-idx="2">
+							<div class="loopback_l"></div>
+							<div class="loopback_r"></div>
+						</div>
+						
+						
+					</div>
+					
+				</div>
+				<div class="tips-box hide">
+					<div class="tips-arrow"></div>
+					<ul class="tips-inner">
+						<li>菜单</li>
+						<li>标签</li>
+						
+						<li>友情链接</li>
+						
+						
+					</ul>
+				</div>
+			</div>
+		
+
+		<div class="switch-area">
+			<div class="switch-wrap">
+				<section class="switch-part switch-part1">
+					<nav class="header-menu">
+						<ul>
+						
+							<li><a href="/">主页</a></li>
+				        
+							<li><a href="/archives">所有文章</a></li>
+				        
+						</ul>
+					</nav>
+					<nav class="header-nav">
+						<div class="social">
+							
+						</div>
+					</nav>
+				</section>
+				
+				
+				<section class="switch-part switch-part2">
+					<div class="widget tagcloud" id="js-tagcloud">
+						
+					</div>
+				</section>
+				
+				
+				
+				<section class="switch-part switch-part3">
+					<div id="js-friends">
+					
+			          <a target="_blank" class="main-nav-link switch-friends-link" href="https://github.com/smackgg/hexo-theme-smackdown">smackdown</a>
+			        
+			        </div>
+				</section>
+				
+
+				
+			</div>
+		</div>
+	</header>				
+</div>
+    </div>
+    <div class="mid-col">
+      <nav id="mobile-nav">
+  	<div class="overlay">
+  		<div class="slider-trigger"></div>
+  		<h1 class="header-author js-mobile-header hide">Kai</h1>
+  	</div>
+	<div class="intrude-less">
+		<header id="header" class="inner">
+			<div class="profilepic">
+				<img lazy-src="https://gss0.baidu.com/-Po3dSag_xI4khGko9WTAnF6hhy/zhidao/pic/item/4afbfbedab64034f236c6fd6adc379310b551db8.jpg" class="js-avatar">
+			</div>
+			<hgroup>
+			  <h1 class="header-author">Kai</h1>
+			</hgroup>
+			
+			<nav class="header-menu">
+				<ul>
+				
+					<li><a href="/">主页</a></li>
+		        
+					<li><a href="/archives">所有文章</a></li>
+		        
+		        <div class="clearfix"></div>
+				</ul>
+			</nav>
+			<nav class="header-nav">
+				<div class="social">
+					
+				</div>
+			</nav>
+		</header>				
+	</div>
+</nav>
+      <div class="body-wrap"><article id="post-elasticsearch" class="article article-type-post" itemscope itemprop="blogPost">
+  
+    <div class="article-meta">
+      <a href="/2017/08/08/elasticsearch/" class="article-date">
+  	<time datetime="2017-08-08T07:40:15.000Z" itemprop="datePublished">2017-08-08</time>
+</a>
+    </div>
+  
+  <div class="article-inner">
+    
+      <input type="hidden" class="isFancy" />
+    
+    
+      <header class="article-header">
+        
+  
+    <h1 class="article-title" itemprop="name">
+      elasticsearch初识
+      
+    </h1>
+  
+
+      </header>
+      
+      <div class="article-info article-info-post">
+        
+        
+
+        
+        <div class="clearfix"></div>
+      </div>
+      
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        <h2 id="elasticsearch-使用中遇到的小问题"><a href="#elasticsearch-使用中遇到的小问题" class="headerlink" title="elasticsearch 使用中遇到的小问题"></a>elasticsearch 使用中遇到的小问题</h2><h3 id="删除更新问题"><a href="#删除更新问题" class="headerlink" title="删除更新问题"></a>删除更新问题</h3><p>在删除一个id的数据后，_search还是可以搜索到相关的数据，但是get却无法在提取删除后的数据。<br>可以理解原因如下：<br><strong>删除一个文档也不会立即从磁盘上移除，它只是被标记成已删除。Elasticsearch将会在你之后添加更多索引的时候才会在后台进行删除内容的清理。</strong><br>但是在这个情况下具体什么情况可以获取，我还不确定。不过删除的目的就是让其不备索引。<br><figure class="highlight bash"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div><div class="line">24</div><div class="line">25</div><div class="line">26</div><div class="line">27</div><div class="line">28</div><div class="line">29</div><div class="line">30</div><div class="line">31</div><div class="line">32</div><div class="line">33</div><div class="line">34</div><div class="line">35</div><div class="line">36</div><div class="line">37</div><div class="line">38</div><div class="line">39</div><div class="line">40</div><div class="line">41</div><div class="line">42</div><div class="line">43</div><div class="line">44</div><div class="line">45</div><div class="line">46</div><div class="line">47</div><div class="line">48</div><div class="line">49</div><div class="line">50</div><div class="line">51</div><div class="line">52</div><div class="line">53</div><div class="line">54</div><div class="line">55</div><div class="line">56</div><div class="line">57</div><div class="line">58</div><div class="line">59</div><div class="line">60</div><div class="line">61</div><div class="line">62</div><div class="line">63</div><div class="line">64</div><div class="line">65</div><div class="line">66</div><div class="line">67</div><div class="line">68</div><div class="line">69</div></pre></td><td class="code"><pre><div class="line">	_, err = client.Delete().</div><div class="line">		Index(<span class="string">"tree"</span>).</div><div class="line">		Type(tpe).</div><div class="line">		Id(t.Id).</div><div class="line">		Refresh(<span class="string">"true"</span>).</div><div class="line">		Do(ctx)</div><div class="line">``` </div><div class="line">*注：本次使用golang，elastic*</div><div class="line"></div><div class="line"><span class="comment">### sort问题</span></div><div class="line"></div><div class="line">es会将string型数据检索时默认analysis，因此sort字符串时需要修改mapping中的字段。可以对field建两种方式，需要sort时`sort(id.raw)`</div><div class="line"></div><div class="line">``` bash</div><div class="line"><span class="string">"id"</span>:&#123;</div><div class="line">	<span class="string">"type"</span>:<span class="string">"string"</span>,</div><div class="line">	<span class="string">"fields"</span>:&#123;</div><div class="line">		<span class="string">"raw"</span>: &#123;</div><div class="line">			<span class="string">"type"</span>:<span class="string">"string"</span>,</div><div class="line">			<span class="string">"index"</span>:<span class="string">"not_analyzed"</span></div><div class="line">		&#125;</div><div class="line">	&#125;</div><div class="line">&#125;</div><div class="line">``` </div><div class="line"></div><div class="line"><span class="comment">## 模糊查询</span></div><div class="line"></div><div class="line">es有专门的模糊查询。前缀查询`elastic.NewPrefixQuery`</div><div class="line"></div><div class="line"><span class="comment">## 查询与过滤</span></div><div class="line"></div><div class="line">过滤可以看成不包含任何感情的法律，</div><div class="line">查询则是拥有人情的法官。</div><div class="line"></div><div class="line">&gt;一条过滤语句会询问每个文档的字段值是否包含着特定值：</div><div class="line"></div><div class="line">&gt;&gt;created 的日期范围是否在 2013 到 2014 ?</div><div class="line">&gt;&gt;status 字段中是否包含单词 <span class="string">"published"</span> ?</div><div class="line">&gt;&gt;lat_lon 字段中的地理位置与目标点相距是否不超过10km ?</div><div class="line"></div><div class="line">&gt;一条查询语句与过滤语句相似，但问法不同：</div><div class="line"></div><div class="line">&gt;&gt;查询语句会询问每个文档的字段值与特定值的匹配程度如何？</div><div class="line"></div><div class="line">&gt;查询语句的典型用法是为了找到文档：</div><div class="line"></div><div class="line">&gt;&gt;查找与 full text search 这个词语最佳匹配的文档</div><div class="line">&gt;&gt;查找包含单词 run ，但是也包含runs, running, jog 或 sprint的文档</div><div class="line">&gt;&gt;同时包含着 quick, brown 和 fox --- 单词间离得越近，该文档的相关性越高</div><div class="line">&gt;&gt;标识着 lucene, search 或 java --- 标识词越多，该文档的相关性越高</div><div class="line"></div><div class="line">&gt;一条查询语句会计算每个文档与查询语句的相关性，会给出一个相关性评分 _score，并且 按照相关性对匹配到的文档进行排序。 这种评分方式非常适用于一个没有完全配置结果的全文本搜索。</div><div class="line"></div><div class="line">*目前看来根据需要可以肆意嵌套，当然最好不要真的‘肆意’，重点在最外层的语句决定返回形式*</div><div class="line"></div><div class="line"><span class="comment">## _search</span></div><div class="line"></div><div class="line">在此命令中，不能直接filter，filter需要嵌套在query中。</div><div class="line"></div><div class="line">``` bash</div><div class="line">GET /_search</div><div class="line">&#123;</div><div class="line">    <span class="string">"query"</span>: &#123;</div><div class="line">        <span class="string">"filtered"</span>: &#123;</div><div class="line">            <span class="string">"query"</span>:    &#123; <span class="string">"match_all"</span>: &#123;&#125;&#125;,</div><div class="line">            <span class="string">"filter"</span>:   &#123; <span class="string">"term"</span>: &#123; <span class="string">"folder"</span>: <span class="string">"inbox"</span> &#125;&#125;</div><div class="line">        &#125;</div><div class="line">    &#125;</div><div class="line">&#125;</div></pre></td></tr></table></figure></p>
+
+      
+    </div>
+    
+  </div>
+  
+    
+<nav id="article-nav">
+  
+  
+    <a href="/2017/08/05/golang/" id="article-nav-older" class="article-nav-link-wrap">
+      <div class="article-nav-title">golang初识</div>
+      <strong class="article-nav-caption">&gt;</strong>
+    </a>
+  
+</nav>
+
+  
+</article>
+
+
+<div class="ds-share share" data-thread-key="elasticsearch" data-title="elasticsearch初识" data-url="http://zk281095.github.io/2017/08/08/elasticsearch/"  data-images="https://gss0.baidu.com/-Po3dSag_xI4khGko9WTAnF6hhy/zhidao/pic/item/4afbfbedab64034f236c6fd6adc379310b551db8.jpg" data-content="elasticsearch初识">
+    <div class="ds-share-inline">
+      <ul  class="ds-share-icons-16">
+      	<li data-toggle="ds-share-icons-more"><a class="ds-more" href="javascript:void(0);">分享到：</a></li>
+        <li><a class="ds-weibo" href="javascript:void(0);" data-service="weibo">微博</a></li>
+        <li><a class="ds-qzone" href="javascript:void(0);" data-service="qzone">QQ空间</a></li>
+        <li><a class="ds-qqt" href="javascript:void(0);" data-service="qqt">腾讯微博</a></li>
+        <li><a class="ds-wechat" href="javascript:void(0);" data-service="wechat">微信</a></li>
+      </ul>
+      <div class="ds-share-icons-more">
+      </div>
+    </div>
+ </div>
+ 
+
+
+
+
+
+</div>
+      <footer id="footer">
+  <div class="outer">
+    <div id="footer-info">
+      <div class="footer-left">
+        &copy; 2017 Kai
+      </div>
+        <div class="footer-right">
+          <a href="http://hexo.io/" target="_blank">Hexo</a>  Theme <a href="https://github.com/smackgg/hexo-theme-smackdown" target="_blank">Smackdown</a>
+        </div>
+    </div>
+  </div>
+</footer>
+    </div>
+    
+  <link rel="stylesheet" href="/fancybox/jquery.fancybox.css">
+
+
+<script>
+	var yiliaConfig = {
+		fancybox: true,
+		mathjax: true,
+		animate: true,
+		isHome: false,
+		isPost: true,
+		isArchive: false,
+		isTag: false,
+		isCategory: false,
+		open_in_new: false
+	}
+</script>
+<script src="/js/main.js"></script>
+
+
+
+<script type="text/x-mathjax-config">
+MathJax.Hub.Config({
+    tex2jax: {
+        inlineMath: [ ['$','$'], ["\\(","\\)"]  ],
+        processEscapes: true,
+        skipTags: ['script', 'noscript', 'style', 'textarea', 'pre', 'code']
+    }
+});
+
+MathJax.Hub.Queue(function() {
+    var all = MathJax.Hub.getAllJax(), i;
+    for(i=0; i < all.length; i += 1) {
+        all[i].SourceElement().parentNode.className += ' has-jax';                 
+    }       
+});
+</script>
+
+<script src="//cdn.bootcss.com/mathjax/2.7.0/MathJax.js"></script>
+
+
+  </div>
+</body>
+</html>

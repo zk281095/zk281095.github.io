@@ -3,22 +3,22 @@
 <head>
   <meta charset="utf-8">
   
-  <title>python初识 | Kai&#39;sBlog</title>
+  <title>golang初识 | Kai&#39;sBlog</title>
 
   <!-- keywords -->
   
 
   <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
-  <meta name="description" content="Python 使用中遇到的小问题建立网络连接2.7和3.x版本的不同建立网络连接的方式产生了变化。 2.7版本123import urlliburl = u&apos;http://***.***.***.***/**/***&apos;res = urllib.urlopen(url,data=&apos;text=&apos; + urllib.quote(text.encode(&quot;utf-8&quot;))).read() 3.x版本123">
+  <meta name="description" content="golang 使用中遇到的小问题定义变量未使用开发过程中经常遇到定义了变量，但是未使用并且忘记注释或删除的时候，产生报错。这是golang的一个很好的开发机制，应该养成这样的习惯，但是个人觉得在开发过程中这样会有可能降低效率。 var x string _ = x  通过这种形式在文件开头对定义的变量进行复制，屏蔽系统的这个功能，然后在开发完成之后删除_ = x，不失为一种方式">
 <meta property="og:type" content="article">
-<meta property="og:title" content="python初识">
-<meta property="og:url" content="http://zk281095.github.io/2017/08/03/python/index.html">
+<meta property="og:title" content="golang初识">
+<meta property="og:url" content="http://zk281095.github.io/2017/08/05/golang/index.html">
 <meta property="og:site_name" content="Kai&#39;sBlog">
-<meta property="og:description" content="Python 使用中遇到的小问题建立网络连接2.7和3.x版本的不同建立网络连接的方式产生了变化。 2.7版本123import urlliburl = u&apos;http://***.***.***.***/**/***&apos;res = urllib.urlopen(url,data=&apos;text=&apos; + urllib.quote(text.encode(&quot;utf-8&quot;))).read() 3.x版本123">
-<meta property="og:updated_time" content="2017-08-03T06:08:54.898Z">
+<meta property="og:description" content="golang 使用中遇到的小问题定义变量未使用开发过程中经常遇到定义了变量，但是未使用并且忘记注释或删除的时候，产生报错。这是golang的一个很好的开发机制，应该养成这样的习惯，但是个人觉得在开发过程中这样会有可能降低效率。 var x string _ = x  通过这种形式在文件开头对定义的变量进行复制，屏蔽系统的这个功能，然后在开发完成之后删除_ = x，不失为一种方式">
+<meta property="og:updated_time" content="2017-08-03T07:18:58.409Z">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:title" content="python初识">
-<meta name="twitter:description" content="Python 使用中遇到的小问题建立网络连接2.7和3.x版本的不同建立网络连接的方式产生了变化。 2.7版本123import urlliburl = u&apos;http://***.***.***.***/**/***&apos;res = urllib.urlopen(url,data=&apos;text=&apos; + urllib.quote(text.encode(&quot;utf-8&quot;))).read() 3.x版本123">
+<meta name="twitter:title" content="golang初识">
+<meta name="twitter:description" content="golang 使用中遇到的小问题定义变量未使用开发过程中经常遇到定义了变量，但是未使用并且忘记注释或删除的时候，产生报错。这是golang的一个很好的开发机制，应该养成这样的习惯，但是个人觉得在开发过程中这样会有可能降低效率。 var x string _ = x  通过这种形式在文件开头对定义的变量进行复制，屏蔽系统的这个功能，然后在开发完成之后删除_ = x，不失为一种方式">
   
     <link rel="alternative" href="/atom.xml" title="Kai&#39;sBlog" type="application/atom+xml">
   
@@ -164,11 +164,11 @@
 		</header>				
 	</div>
 </nav>
-      <div class="body-wrap"><article id="post-python" class="article article-type-post" itemscope itemprop="blogPost">
+      <div class="body-wrap"><article id="post-golang" class="article article-type-post" itemscope itemprop="blogPost">
   
     <div class="article-meta">
-      <a href="/2017/08/03/python/" class="article-date">
-  	<time datetime="2017-08-03T02:40:15.000Z" itemprop="datePublished">2017-08-03</time>
+      <a href="/2017/08/05/golang/" class="article-date">
+  	<time datetime="2017-08-05T06:32:15.000Z" itemprop="datePublished">2017-08-05</time>
 </a>
     </div>
   
@@ -181,7 +181,7 @@
         
   
     <h1 class="article-title" itemprop="name">
-      python初识
+      golang初识
       
     </h1>
   
@@ -199,10 +199,11 @@
     
     <div class="article-entry" itemprop="articleBody">
       
-        <h2 id="Python-使用中遇到的小问题"><a href="#Python-使用中遇到的小问题" class="headerlink" title="Python 使用中遇到的小问题"></a>Python 使用中遇到的小问题</h2><h3 id="建立网络连接"><a href="#建立网络连接" class="headerlink" title="建立网络连接"></a>建立网络连接</h3><p>2.7和3.x版本的不同建立网络连接的方式产生了变化。</p>
-<p>2.7版本<br><figure class="highlight bash"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div></pre></td><td class="code"><pre><div class="line">import urllib</div><div class="line">url = u<span class="string">'http://***.***.***.***/**/***'</span></div><div class="line">res = urllib.urlopen(url,data=<span class="string">'text='</span> + urllib.quote(text.encode(<span class="string">"utf-8"</span>))).<span class="built_in">read</span>()</div></pre></td></tr></table></figure></p>
-<p>3.x版本<br><figure class="highlight bash"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div></pre></td><td class="code"><pre><div class="line">import urllib.request</div><div class="line">str = <span class="string">'http://***.***.***.***/**/***?text='</span> + repr(s.replace(<span class="string">' '</span>, <span class="string">','</span>).encode(<span class="string">'utf-8'</span>))[2:-1].replace(<span class="string">'\\x'</span>, <span class="string">'%'</span>)</div><div class="line">    res = urllib.request.urlopen(str).<span class="built_in">read</span>()</div></pre></td></tr></table></figure></p>
-<p>json解析<br><figure class="highlight bash"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div></pre></td><td class="code"><pre><div class="line">import json</div><div class="line">str_json = json.loads(res)</div></pre></td></tr></table></figure></p>
+        <h2 id="golang-使用中遇到的小问题"><a href="#golang-使用中遇到的小问题" class="headerlink" title="golang 使用中遇到的小问题"></a>golang 使用中遇到的小问题</h2><h3 id="定义变量未使用"><a href="#定义变量未使用" class="headerlink" title="定义变量未使用"></a>定义变量未使用</h3><p>开发过程中经常遇到定义了变量，但是未使用并且忘记注释或删除的时候，产生报错。<br>这是golang的一个很好的开发机制，应该养成这样的习惯，但是个人觉得在开发过程中这样会有可能降低效率。</p>
+<pre><code class="bash">var x string
+_ = x
+</code></pre>
+<p>通过这种形式在文件开头对定义的变量进行复制，屏蔽系统的这个功能，然后在开发完成之后删除<code>_ = x</code>，不失为一种方式</p>
 
       
     </div>
@@ -212,18 +213,18 @@
     
 <nav id="article-nav">
   
-    <a href="/2017/08/05/golang/" id="article-nav-newer" class="article-nav-link-wrap">
+    <a href="/2017/08/08/elasticsearch/" id="article-nav-newer" class="article-nav-link-wrap">
       <strong class="article-nav-caption">&lt;</strong>
       <div class="article-nav-title">
         
-          golang初识
+          elasticsearch初识
         
       </div>
     </a>
   
   
-    <a href="/2017/08/03/md语法/" id="article-nav-older" class="article-nav-link-wrap">
-      <div class="article-nav-title">md语法</div>
+    <a href="/2017/08/03/python/" id="article-nav-older" class="article-nav-link-wrap">
+      <div class="article-nav-title">python初识</div>
       <strong class="article-nav-caption">&gt;</strong>
     </a>
   
@@ -233,7 +234,7 @@
 </article>
 
 
-<div class="ds-share share" data-thread-key="python" data-title="python初识" data-url="http://zk281095.github.io/2017/08/03/python/"  data-images="https://gss0.baidu.com/-Po3dSag_xI4khGko9WTAnF6hhy/zhidao/pic/item/4afbfbedab64034f236c6fd6adc379310b551db8.jpg" data-content="python初识">
+<div class="ds-share share" data-thread-key="golang" data-title="golang初识" data-url="http://zk281095.github.io/2017/08/05/golang/"  data-images="https://gss0.baidu.com/-Po3dSag_xI4khGko9WTAnF6hhy/zhidao/pic/item/4afbfbedab64034f236c6fd6adc379310b551db8.jpg" data-content="golang初识">
     <div class="ds-share-inline">
       <ul  class="ds-share-icons-16">
       	<li data-toggle="ds-share-icons-more"><a class="ds-more" href="javascript:void(0);">分享到：</a></li>
