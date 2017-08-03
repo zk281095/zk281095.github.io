@@ -216,7 +216,7 @@
 <blockquote>
 <p>一条过滤语句会询问每个文档的字段值是否包含着特定值：</p>
 <blockquote>
-<p>created 的日期范围是否在 2013 到 2014 ?<br>status 字段中是否包含单词 “published” ?<br>lat_lon 字段中的地理位置与目标点相距是否不超过10km ?<br>一条查询语句与过滤语句相似，但问法不同：<br>查询语句会询问每个文档的字段值与特定值的匹配程度如何？<br>查询语句的典型用法是为了找到文档：<br>查找与 full text search 这个词语最佳匹配的文档<br>查找包含单词 run ，但是也包含runs, running, jog 或 sprint的文档<br>》同时包含着 quick, brown 和 fox — 单词间离得越近，该文档的相关性越高<br>》标识着 lucene, search 或 java — 标识词越多，该文档的相关性越高<br>一条查询语句会计算每个文档与查询语句的相关性，会给出一个相关性评分 _score，并且 按照相关性对匹配到的文档进行排序。 这种评分方式非常适用于一个没有完全配置结果的全文本搜索。</p>
+<p>created 的日期范围是否在 2013 到 2014 ?<br>status 字段中是否包含单词 “published” ?<br>lat_lon 字段中的地理位置与目标点相距是否不超过10km ?<br>一条查询语句与过滤语句相似，但问法不同：<br>查询语句会询问每个文档的字段值与特定值的匹配程度如何？<br>查询语句的典型用法是为了找到文档：<br>查找与 full text search 这个词语最佳匹配的文档<br>查找包含单词 run ，但是也包含runs, running, jog 或 sprint的文档<br>同时包含着 quick, brown 和 fox — 单词间离得越近，该文档的相关性越高<br>标识着 lucene, search 或 java — 标识词越多，该文档的相关性越高<br>一条查询语句会计算每个文档与查询语句的相关性，会给出一个相关性评分 _score，并且 按照相关性对匹配到的文档进行排序。 这种评分方式非常适用于一个没有完全配置结果的全文本搜索。</p>
 </blockquote>
 </blockquote>
 
