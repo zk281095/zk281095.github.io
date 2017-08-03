@@ -216,6 +216,8 @@
 <p><em>目前看来根据需要可以肆意嵌套，当然最好不要真的‘肆意’，重点在最外层的语句决定返回形式</em></p>
 <h2 id="search"><a href="#search" class="headerlink" title="_search"></a>_search</h2><p>在此命令中，不能直接filter，filter需要嵌套在query中。</p>
 <figure class="highlight bash"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div></pre></td><td class="code"><pre><div class="line">GET /_search</div><div class="line">&#123;</div><div class="line">    <span class="string">"query"</span>: &#123;</div><div class="line">        <span class="string">"filtered"</span>: &#123;</div><div class="line">            <span class="string">"query"</span>:    &#123; <span class="string">"match_all"</span>: &#123;&#125;&#125;,</div><div class="line">            <span class="string">"filter"</span>:   &#123; <span class="string">"term"</span>: &#123; <span class="string">"folder"</span>: <span class="string">"inbox"</span> &#125;&#125;</div><div class="line">        &#125;</div><div class="line">    &#125;</div><div class="line">&#125;</div></pre></td></tr></table></figure>
+<h2 id="字段数据"><a href="#字段数据" class="headerlink" title="字段数据"></a>字段数据</h2><p>为了提高排序效率，ElasticSearch 会将所有字段的值加载到内存中，这就叫做”数据字段”。<br><strong>提示：为了保证你不会遇到这些冲突，建议在同一个索引的每一个类型中，确保用同样的方式映射同名的字段</strong></p>
+
       
     </div>
     
@@ -357,70 +359,11 @@ _ = x
 
 
   
-    <article id="post-hexo" class="article article-type-post" itemscope itemprop="blogPost">
-  
-    <div class="article-meta">
-      <a href="/2017/08/03/hexo/" class="article-date">
-  	<time datetime="2017-08-03T02:10:15.000Z" itemprop="datePublished">2017-08-03</time>
-</a>
-    </div>
-  
-  <div class="article-inner">
-    
-      <input type="hidden" class="isFancy" />
-    
-    
-      <header class="article-header">
-        
-  
-    <h1 itemprop="name">
-      <a class="article-title" href="/2017/08/03/hexo/">
-        hexo
-        
-      </a>
-    </h1>
-  
-
-      </header>
-      
-    
-    <div class="article-entry" itemprop="articleBody">
-      
-        <h1 id="较新的教程：-使用hexo-github搭建免费个人博客详细教程"><a href="#较新的教程：-使用hexo-github搭建免费个人博客详细教程" class="headerlink" title="较新的教程： 使用hexo+github搭建免费个人博客详细教程"></a>较新的教程： <a href="http://www.cnblogs.com/liuxianan/p/build-blog-website-by-hexo-github.html" target="_blank" rel="external">使用hexo+github搭建免费个人博客详细教程</a></h1><h2 id="遇到的问题"><a href="#遇到的问题" class="headerlink" title="遇到的问题"></a>遇到的问题</h2><p>配置<code>_config.yml</code>中有关deploy的部分：</p>
-<p>正确的：<br><figure class="highlight bash"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div></pre></td><td class="code"><pre><div class="line">deploy:</div><div class="line">  <span class="built_in">type</span>: git</div><div class="line">  repository: git@github.com:zk281095/zk281095.github.io.git</div><div class="line">  branch: master</div></pre></td></tr></table></figure></p>
-<p>错误的：<br><figure class="highlight bash"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div></pre></td><td class="code"><pre><div class="line">deploy:</div><div class="line">  <span class="built_in">type</span>: github</div><div class="line">  repository: https://github.com/zk281095/zk281095.github.io.git</div><div class="line">  branch: master</div></pre></td></tr></table></figure></p>
-<h2 id="hexo常用命令"><a href="#hexo常用命令" class="headerlink" title="hexo常用命令"></a>hexo常用命令</h2><h3 id="hexo部署"><a href="#hexo部署" class="headerlink" title="hexo部署"></a>hexo部署</h3><p><code>hexo clean</code> : 清除。需要重新部署时（如修改主题之后），需要运行此命令<br><code>hexo g</code> : 生成<br><code>hexo d</code> : 发布<br><code>hexo d -g</code> : 上两个命令的合成</p>
-<h2 id="写文章"><a href="#写文章" class="headerlink" title="写文章"></a>写文章</h2><h3 id="发布文章有两种方式"><a href="#发布文章有两种方式" class="headerlink" title="发布文章有两种方式"></a>发布文章有两种方式</h3><p><code>hexo new &quot;title&quot;</code> : 新建一篇博客<br><code>hexo new draft &quot;title&quot;</code> : 新建草稿<br><code>hexo publish &quot;title&quot;</code> : 将草稿发布</p>
-
-      
-    </div>
-    
-    <div class="article-info article-info-index">
-      
-      
-      
-
-      
-      <div class="clearfix"></div>
-    </div>
-      
-    
-  </div>
-  
-</article>
-
-
-
-
-
-
-
-  
     <article id="post-md语法" class="article article-type-post" itemscope itemprop="blogPost">
   
     <div class="article-meta">
       <a href="/2017/08/03/md语法/" class="article-date">
-  	<time datetime="2017-08-03T01:41:19.481Z" itemprop="datePublished">2017-08-03</time>
+  	<time datetime="2017-08-03T02:30:15.000Z" itemprop="datePublished">2017-08-03</time>
 </a>
     </div>
   
@@ -477,6 +420,65 @@ _ = x
 <p>*this text is surrounded by literal asterisks*</p>
 <h2 id="代码"><a href="#代码" class="headerlink" title="代码"></a>代码</h2><p>Use the <code>printf()</code> function.</p>
 <figure class="highlight bash"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">$ hexo new <span class="string">"My New Post"</span></div></pre></td></tr></table></figure>
+
+      
+    </div>
+    
+    <div class="article-info article-info-index">
+      
+      
+      
+
+      
+      <div class="clearfix"></div>
+    </div>
+      
+    
+  </div>
+  
+</article>
+
+
+
+
+
+
+
+  
+    <article id="post-hexo" class="article article-type-post" itemscope itemprop="blogPost">
+  
+    <div class="article-meta">
+      <a href="/2017/08/03/hexo/" class="article-date">
+  	<time datetime="2017-08-03T02:10:15.000Z" itemprop="datePublished">2017-08-03</time>
+</a>
+    </div>
+  
+  <div class="article-inner">
+    
+      <input type="hidden" class="isFancy" />
+    
+    
+      <header class="article-header">
+        
+  
+    <h1 itemprop="name">
+      <a class="article-title" href="/2017/08/03/hexo/">
+        hexo
+        
+      </a>
+    </h1>
+  
+
+      </header>
+      
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        <h1 id="较新的教程：-使用hexo-github搭建免费个人博客详细教程"><a href="#较新的教程：-使用hexo-github搭建免费个人博客详细教程" class="headerlink" title="较新的教程： 使用hexo+github搭建免费个人博客详细教程"></a>较新的教程： <a href="http://www.cnblogs.com/liuxianan/p/build-blog-website-by-hexo-github.html" target="_blank" rel="external">使用hexo+github搭建免费个人博客详细教程</a></h1><h2 id="遇到的问题"><a href="#遇到的问题" class="headerlink" title="遇到的问题"></a>遇到的问题</h2><p>配置<code>_config.yml</code>中有关deploy的部分：</p>
+<p>正确的：<br><figure class="highlight bash"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div></pre></td><td class="code"><pre><div class="line">deploy:</div><div class="line">  <span class="built_in">type</span>: git</div><div class="line">  repository: git@github.com:zk281095/zk281095.github.io.git</div><div class="line">  branch: master</div></pre></td></tr></table></figure></p>
+<p>错误的：<br><figure class="highlight bash"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div></pre></td><td class="code"><pre><div class="line">deploy:</div><div class="line">  <span class="built_in">type</span>: github</div><div class="line">  repository: https://github.com/zk281095/zk281095.github.io.git</div><div class="line">  branch: master</div></pre></td></tr></table></figure></p>
+<h2 id="hexo常用命令"><a href="#hexo常用命令" class="headerlink" title="hexo常用命令"></a>hexo常用命令</h2><h3 id="hexo部署"><a href="#hexo部署" class="headerlink" title="hexo部署"></a>hexo部署</h3><p><code>hexo clean</code> : 清除。需要重新部署时（如修改主题之后），需要运行此命令<br><code>hexo g</code> : 生成<br><code>hexo d</code> : 发布<br><code>hexo d -g</code> : 上两个命令的合成</p>
+<h2 id="写文章"><a href="#写文章" class="headerlink" title="写文章"></a>写文章</h2><h3 id="发布文章有两种方式"><a href="#发布文章有两种方式" class="headerlink" title="发布文章有两种方式"></a>发布文章有两种方式</h3><p><code>hexo new &quot;title&quot;</code> : 新建一篇博客<br><code>hexo new draft &quot;title&quot;</code> : 新建草稿<br><code>hexo publish &quot;title&quot;</code> : 将草稿发布</p>
 
       
     </div>
