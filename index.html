@@ -162,10 +162,10 @@
 </nav>
       <div class="body-wrap">
   
-    <article id="post-test" class="article article-type-post" itemscope itemprop="blogPost">
+    <article id="post-elasticsearch" class="article article-type-post" itemscope itemprop="blogPost">
   
     <div class="article-meta">
-      <a href="/2017/08/03/test/" class="article-date">
+      <a href="/2017/08/03/elasticsearch/" class="article-date">
   	<time datetime="2017-08-03T02:40:15.000Z" itemprop="datePublished">2017-08-03</time>
 </a>
     </div>
@@ -179,8 +179,8 @@
         
   
     <h1 itemprop="name">
-      <a class="article-title" href="/2017/08/03/test/">
-        test
+      <a class="article-title" href="/2017/08/03/elasticsearch/">
+        elasticsearch初识
         
       </a>
     </h1>
@@ -191,7 +191,85 @@
     
     <div class="article-entry" itemprop="articleBody">
       
+        <h2 id="elasticsearch-使用中遇到的小问题"><a href="#elasticsearch-使用中遇到的小问题" class="headerlink" title="elasticsearch 使用中遇到的小问题"></a>elasticsearch 使用中遇到的小问题</h2><h3 id="删除更新问题"><a href="#删除更新问题" class="headerlink" title="删除更新问题"></a>删除更新问题</h3><p>在删除一个id的数据后，_search还是可以搜索到相关的数据，但是get却无法在提取删除后的数据。<br>可以理解原因如下：<br><strong>删除一个文档也不会立即从磁盘上移除，它只是被标记成已删除。Elasticsearch将会在你之后添加更多索引的时候才会在后台进行删除内容的清理。</strong><br>但是在这个情况下具体什么情况可以获取，我还不确定。不过删除的目的就是让其不备索引。</p>
+<pre><code class="bash">_, err = client.Delete().
+    Index(<span class="string">"tree"</span>).
+    Type(tpe).
+    Id(t.Id).
+    Refresh(<span class="string">"true"</span>).
+    Do(ctx)
+</code></pre>
+<p><em>注：本次使用golang，elastic</em></p>
+<h3 id="sort问题"><a href="#sort问题" class="headerlink" title="sort问题"></a>sort问题</h3><p>es会将string型数据检索时默认analysis，因此sort字符串时需要修改mapping中的字段。可以对field建两种方式，需要sort时<em>sort(id.raw)</em></p>
+<pre><code class="bash"><span class="string">"id"</span>:{
+    <span class="string">"type"</span>:<span class="string">"string"</span>,
+    <span class="string">"fields"</span>:{
+        <span class="string">"raw"</span>: {
+            <span class="string">"type"</span>:<span class="string">"string"</span>,
+            <span class="string">"index"</span>:<span class="string">"not_analyzed"</span>
+        }
+    }
+}
+</code></pre>
+
+      
+    </div>
+    
+    <div class="article-info article-info-index">
+      
+      
+      
+
+      
+      <div class="clearfix"></div>
+    </div>
+      
+    
+  </div>
+  
+</article>
+
+
+
+
+
+
+
+  
+    <article id="post-python" class="article article-type-post" itemscope itemprop="blogPost">
+  
+    <div class="article-meta">
+      <a href="/2017/08/03/python/" class="article-date">
+  	<time datetime="2017-08-03T02:40:15.000Z" itemprop="datePublished">2017-08-03</time>
+</a>
+    </div>
+  
+  <div class="article-inner">
+    
+      <input type="hidden" class="isFancy" />
+    
+    
+      <header class="article-header">
         
+  
+    <h1 itemprop="name">
+      <a class="article-title" href="/2017/08/03/python/">
+        python初识
+        
+      </a>
+    </h1>
+  
+
+      </header>
+      
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        <h2 id="Python-使用中遇到的小问题"><a href="#Python-使用中遇到的小问题" class="headerlink" title="Python 使用中遇到的小问题"></a>Python 使用中遇到的小问题</h2><h3 id="建立网络连接"><a href="#建立网络连接" class="headerlink" title="建立网络连接"></a>建立网络连接</h3><p>2.7和3.x版本的不同建立网络连接的方式产生了变化。</p>
+<p>2.7版本<br><figure class="highlight bash"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div></pre></td><td class="code"><pre><div class="line">import urllib</div><div class="line">url = u<span class="string">'http://***.***.***.***/**/***'</span></div><div class="line">res = urllib.urlopen(url,data=<span class="string">'text='</span> + urllib.quote(text.encode(<span class="string">"utf-8"</span>))).<span class="built_in">read</span>()</div></pre></td></tr></table></figure></p>
+<p>3.x版本<br><figure class="highlight bash"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div></pre></td><td class="code"><pre><div class="line">import urllib.request</div><div class="line">str = <span class="string">'http://***.***.***.***/**/***?text='</span> + repr(s.replace(<span class="string">' '</span>, <span class="string">','</span>).encode(<span class="string">'utf-8'</span>))[2:-1].replace(<span class="string">'\\x'</span>, <span class="string">'%'</span>)</div><div class="line">    res = urllib.request.urlopen(str).<span class="built_in">read</span>()</div></pre></td></tr></table></figure></p>
+<p>json解析<br><figure class="highlight bash"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div></pre></td><td class="code"><pre><div class="line">import json</div><div class="line">str_json = json.loads(res)</div></pre></td></tr></table></figure></p>
+
       
     </div>
     
