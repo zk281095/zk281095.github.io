@@ -3,22 +3,22 @@
 <head>
   <meta charset="utf-8">
   
-  <title>python初识 | Kai&#39;sBlog</title>
+  <title>hexo | Kai&#39;sBlog</title>
 
   <!-- keywords -->
   
 
   <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
-  <meta name="description" content="Python 使用中遇到的小问题建立网络连接2.7和3.x版本的不同建立网络连接的方式产生了变化。 2.7版本123import urlliburl = u&apos;http://***.***.***.***/**/***&apos;res = urllib.urlopen(url,data=&apos;text=&apos; + urllib.quote(text.encode(&quot;utf-8&quot;))).read() 3.x版本123">
+  <meta name="description" content="较新的教程： 使用hexo+github搭建免费个人博客详细教程遇到的问题配置_config.yml中有关deploy的部分： 正确的：1234deploy:  type: git  repository: git@github.com:zk281095/zk281095.github.io.git  branch: master 错误的：1234deploy:  type: github  re">
 <meta property="og:type" content="article">
-<meta property="og:title" content="python初识">
-<meta property="og:url" content="http://zk281095.github.io/2017/08/03/python/index.html">
+<meta property="og:title" content="hexo">
+<meta property="og:url" content="http://zk281095.github.io/2017/08/03/hexo/index.html">
 <meta property="og:site_name" content="Kai&#39;sBlog">
-<meta property="og:description" content="Python 使用中遇到的小问题建立网络连接2.7和3.x版本的不同建立网络连接的方式产生了变化。 2.7版本123import urlliburl = u&apos;http://***.***.***.***/**/***&apos;res = urllib.urlopen(url,data=&apos;text=&apos; + urllib.quote(text.encode(&quot;utf-8&quot;))).read() 3.x版本123">
-<meta property="og:updated_time" content="2017-08-03T06:08:54.898Z">
+<meta property="og:description" content="较新的教程： 使用hexo+github搭建免费个人博客详细教程遇到的问题配置_config.yml中有关deploy的部分： 正确的：1234deploy:  type: git  repository: git@github.com:zk281095/zk281095.github.io.git  branch: master 错误的：1234deploy:  type: github  re">
+<meta property="og:updated_time" content="2017-08-03T07:53:36.929Z">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:title" content="python初识">
-<meta name="twitter:description" content="Python 使用中遇到的小问题建立网络连接2.7和3.x版本的不同建立网络连接的方式产生了变化。 2.7版本123import urlliburl = u&apos;http://***.***.***.***/**/***&apos;res = urllib.urlopen(url,data=&apos;text=&apos; + urllib.quote(text.encode(&quot;utf-8&quot;))).read() 3.x版本123">
+<meta name="twitter:title" content="hexo">
+<meta name="twitter:description" content="较新的教程： 使用hexo+github搭建免费个人博客详细教程遇到的问题配置_config.yml中有关deploy的部分： 正确的：1234deploy:  type: git  repository: git@github.com:zk281095/zk281095.github.io.git  branch: master 错误的：1234deploy:  type: github  re">
   
     <link rel="alternative" href="/atom.xml" title="Kai&#39;sBlog" type="application/atom+xml">
   
@@ -164,11 +164,11 @@
 		</header>				
 	</div>
 </nav>
-      <div class="body-wrap"><article id="post-python" class="article article-type-post" itemscope itemprop="blogPost">
+      <div class="body-wrap"><article id="post-hexo" class="article article-type-post" itemscope itemprop="blogPost">
   
     <div class="article-meta">
-      <a href="/2017/08/03/python/" class="article-date">
-  	<time datetime="2017-08-03T02:40:15.000Z" itemprop="datePublished">2017-08-03</time>
+      <a href="/2017/08/03/hexo/" class="article-date">
+  	<time datetime="2017-08-03T02:10:15.000Z" itemprop="datePublished">2017-08-03</time>
 </a>
     </div>
   
@@ -181,7 +181,7 @@
         
   
     <h1 class="article-title" itemprop="name">
-      python初识
+      hexo
       
     </h1>
   
@@ -199,10 +199,11 @@
     
     <div class="article-entry" itemprop="articleBody">
       
-        <h2 id="Python-使用中遇到的小问题"><a href="#Python-使用中遇到的小问题" class="headerlink" title="Python 使用中遇到的小问题"></a>Python 使用中遇到的小问题</h2><h3 id="建立网络连接"><a href="#建立网络连接" class="headerlink" title="建立网络连接"></a>建立网络连接</h3><p>2.7和3.x版本的不同建立网络连接的方式产生了变化。</p>
-<p>2.7版本<br><figure class="highlight bash"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div></pre></td><td class="code"><pre><div class="line">import urllib</div><div class="line">url = u<span class="string">'http://***.***.***.***/**/***'</span></div><div class="line">res = urllib.urlopen(url,data=<span class="string">'text='</span> + urllib.quote(text.encode(<span class="string">"utf-8"</span>))).<span class="built_in">read</span>()</div></pre></td></tr></table></figure></p>
-<p>3.x版本<br><figure class="highlight bash"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div></pre></td><td class="code"><pre><div class="line">import urllib.request</div><div class="line">str = <span class="string">'http://***.***.***.***/**/***?text='</span> + repr(s.replace(<span class="string">' '</span>, <span class="string">','</span>).encode(<span class="string">'utf-8'</span>))[2:-1].replace(<span class="string">'\\x'</span>, <span class="string">'%'</span>)</div><div class="line">    res = urllib.request.urlopen(str).<span class="built_in">read</span>()</div></pre></td></tr></table></figure></p>
-<p>json解析<br><figure class="highlight bash"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div></pre></td><td class="code"><pre><div class="line">import json</div><div class="line">str_json = json.loads(res)</div></pre></td></tr></table></figure></p>
+        <h1 id="较新的教程：-使用hexo-github搭建免费个人博客详细教程"><a href="#较新的教程：-使用hexo-github搭建免费个人博客详细教程" class="headerlink" title="较新的教程： 使用hexo+github搭建免费个人博客详细教程"></a>较新的教程： <a href="http://www.cnblogs.com/liuxianan/p/build-blog-website-by-hexo-github.html" target="_blank" rel="external">使用hexo+github搭建免费个人博客详细教程</a></h1><h2 id="遇到的问题"><a href="#遇到的问题" class="headerlink" title="遇到的问题"></a>遇到的问题</h2><p>配置<code>_config.yml</code>中有关deploy的部分：</p>
+<p>正确的：<br><figure class="highlight bash"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div></pre></td><td class="code"><pre><div class="line">deploy:</div><div class="line">  <span class="built_in">type</span>: git</div><div class="line">  repository: git@github.com:zk281095/zk281095.github.io.git</div><div class="line">  branch: master</div></pre></td></tr></table></figure></p>
+<p>错误的：<br><figure class="highlight bash"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div></pre></td><td class="code"><pre><div class="line">deploy:</div><div class="line">  <span class="built_in">type</span>: github</div><div class="line">  repository: https://github.com/zk281095/zk281095.github.io.git</div><div class="line">  branch: master</div></pre></td></tr></table></figure></p>
+<h2 id="hexo常用命令"><a href="#hexo常用命令" class="headerlink" title="hexo常用命令"></a>hexo常用命令</h2><h3 id="hexo部署"><a href="#hexo部署" class="headerlink" title="hexo部署"></a>hexo部署</h3><p><code>hexo clean</code> : 清除。需要重新部署时（如修改主题之后），需要运行此命令<br><code>hexo g</code> : 生成<br><code>hexo d</code> : 发布<br><code>hexo d -g</code> : 上两个命令的合成</p>
+<h2 id="写文章"><a href="#写文章" class="headerlink" title="写文章"></a>写文章</h2><h3 id="发布文章有两种方式"><a href="#发布文章有两种方式" class="headerlink" title="发布文章有两种方式"></a>发布文章有两种方式</h3><p><code>hexo new &quot;title&quot;</code> : 新建一篇博客<br><code>hexo new draft &quot;title&quot;</code> : 新建草稿<br><code>hexo publish &quot;title&quot;</code> : 将草稿发布</p>
 
       
     </div>
@@ -212,18 +213,18 @@
     
 <nav id="article-nav">
   
-    <a href="/2017/08/05/golang/" id="article-nav-newer" class="article-nav-link-wrap">
+    <a href="/2017/08/03/python/" id="article-nav-newer" class="article-nav-link-wrap">
       <strong class="article-nav-caption">&lt;</strong>
       <div class="article-nav-title">
         
-          golang初识
+          python初识
         
       </div>
     </a>
   
   
-    <a href="/2017/08/03/hexo/" id="article-nav-older" class="article-nav-link-wrap">
-      <div class="article-nav-title">hexo</div>
+    <a href="/2017/08/03/md语法/" id="article-nav-older" class="article-nav-link-wrap">
+      <div class="article-nav-title">md语法</div>
       <strong class="article-nav-caption">&gt;</strong>
     </a>
   
@@ -233,7 +234,7 @@
 </article>
 
 
-<div class="ds-share share" data-thread-key="python" data-title="python初识" data-url="http://zk281095.github.io/2017/08/03/python/"  data-images="https://gss0.baidu.com/-Po3dSag_xI4khGko9WTAnF6hhy/zhidao/pic/item/4afbfbedab64034f236c6fd6adc379310b551db8.jpg" data-content="python初识">
+<div class="ds-share share" data-thread-key="hexo" data-title="hexo" data-url="http://zk281095.github.io/2017/08/03/hexo/"  data-images="https://gss0.baidu.com/-Po3dSag_xI4khGko9WTAnF6hhy/zhidao/pic/item/4afbfbedab64034f236c6fd6adc379310b551db8.jpg" data-content="hexo">
     <div class="ds-share-inline">
       <ul  class="ds-share-icons-16">
       	<li data-toggle="ds-share-icons-more"><a class="ds-more" href="javascript:void(0);">分享到：</a></li>
