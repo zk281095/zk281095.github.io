@@ -15,7 +15,7 @@
 <meta property="og:url" content="http://zk281095.github.io/2017/08/14/中文分词/index.html">
 <meta property="og:site_name" content="Kai&#39;sBlog">
 <meta property="og:description" content="stanford nlp测试使用stanford-corenlp-3.8.0.jar 导入时引入此包，其他的-javadoc/models/sources，不对。 ##Tire树 Tire树分词是词典树分词，将词建立树，然后分词时顺序读取句子字符匹配，完成分词。 用Trie树词典分词就是按照句子的字符顺序从root往下走，每走到一个结束节点则分出一个词。中途遇到的中继节点统统忽略，这种方式也称“最">
-<meta property="og:updated_time" content="2017-08-14T10:00:07.440Z">
+<meta property="og:updated_time" content="2017-08-14T10:02:48.749Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="中文分词学习ing">
 <meta name="twitter:description" content="stanford nlp测试使用stanford-corenlp-3.8.0.jar 导入时引入此包，其他的-javadoc/models/sources，不对。 ##Tire树 Tire树分词是词典树分词，将词建立树，然后分词时顺序读取句子字符匹配，完成分词。 用Trie树词典分词就是按照句子的字符顺序从root往下走，每走到一个结束节点则分出一个词。中途遇到的中继节点统统忽略，这种方式也称“最">
@@ -204,7 +204,7 @@
 <p><strong><em>Tire树分词是词典树分词，将词建立树，然后分词时顺序读取句子字符匹配，完成分词。</em></strong></p>
 <p>用Trie树词典分词就是按照句子的字符顺序从root往下走，每走到一个结束节点则分出一个词。中途遇到的中继节点统统忽略，这种方式也称“最长匹配”，是一种很武断的方式。<br>要想提高分词效果，就必须引入条件概率（隐马尔可夫模型），这就是Ansj分词的使命吧。</p>
 <p>##DoubleArrayTire</p>
-<figure class="highlight bash"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div></pre></td><td class="code"><pre><div class="line">双数组Trie (Double-Array Trie)结构由日本人JUN-ICHI AOE于1989年提出的，是Trie结构的压缩形式，仅用两个线性数组来表示Trie树，该结构有效结合了数字搜索树(Digital Search Tree)检索时间高效的特点和链式表示的Trie空间结构紧凑的特点。双数组Trie的本质是一个确定有限状态自动机（DFA），每个节点代表自动机的一个状态，根据变量不同，进行状态转移，当到达结束状态或无法转移时，完成一次查询操作。在双数组所有键中包含的字符之间的联系都是通过简单的数学加法运算表示，不仅提高了检索速度，而且省去了链式结构中使用的大量指针，节省了存储空间。</div><div class="line">                  ——《基于双数组Ｔｒｉｅ树算法的字典改进和实现》</div></pre></td></tr></table></figure>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div></pre></td><td class="code"><pre><div class="line">双数组Trie (Double-Array Trie)结构由日本人JUN-ICHI AOE于1989年提出的，</div><div class="line">是Trie结构的压缩形式，仅用两个线性数组来表示Trie树，该结构有效结合了数</div><div class="line">字搜索树(Digital Search Tree)检索时间高效的特点和链式表示的Trie空间结</div><div class="line">构紧凑的特点。双数组Trie的本质是一个确定有限状态自动机（DFA），每个节</div><div class="line">点代表自动机的一个状态，根据变量不同，进行状态转移，当到达结束状态或</div><div class="line">无法转移时，完成一次查询操作。在双数组所有键中包含的字符之间的联系都是</div><div class="line">通过简单的数学加法运算表示，不仅提高了检索速度，而且省去了链式结构中使</div><div class="line">用的大量指针，节省了存储空间。</div><div class="line">                         ——《基于双数组Ｔｒｉｅ树算法的字典改进和实现》</div></pre></td></tr></table></figure>
 <p>DoubleArrayTire理解为两个数组base和check来维护tire树</p>
 <p><a href="http://www.hankcs.com/program/java/%E5%8F%8C%E6%95%B0%E7%BB%84trie%E6%A0%91doublearraytriejava%E5%AE%9E%E7%8E%B0.html" target="_blank" rel="external">文档</a></p>
 <p>##看到的分词器代码的简单理解</p>
