@@ -162,6 +162,127 @@
 </nav>
       <div class="body-wrap">
   
+    <article id="post-中文分词" class="article article-type-post" itemscope itemprop="blogPost">
+  
+    <div class="article-meta">
+      <a href="/2017/08/14/中文分词/" class="article-date">
+  	<time datetime="2017-08-14T02:30:15.000Z" itemprop="datePublished">2017-08-14</time>
+</a>
+    </div>
+  
+  <div class="article-inner">
+    
+      <input type="hidden" class="isFancy" />
+    
+    
+      <header class="article-header">
+        
+  
+    <h1 itemprop="name">
+      <a class="article-title" href="/2017/08/14/中文分词/">
+        中文分词学习ing
+        
+      </a>
+    </h1>
+  
+
+      </header>
+      
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        <h2 id="stanford-nlp测试使用"><a href="#stanford-nlp测试使用" class="headerlink" title="stanford nlp测试使用"></a>stanford nlp测试使用</h2><p><strong><em>stanford-corenlp-3.8.0.jar 导入时引入此包，其他的-javadoc/models/sources，不对。</em></strong></p>
+<p>##Tire树</p>
+<p><strong><em>Tire树分词是词典树分词，将词建立树，然后分词时顺序读取句子字符匹配，完成分词。</em></strong></p>
+<p>用Trie树词典分词就是按照句子的字符顺序从root往下走，每走到一个结束节点则分出一个词。中途遇到的中继节点统统忽略，这种方式也称“最长匹配”，是一种很武断的方式。<br>要想提高分词效果，就必须引入条件概率（隐马尔可夫模型），这就是Ansj分词的使命吧。</p>
+<p>##DoubleArrayTire</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div></pre></td><td class="code"><pre><div class="line">双数组Trie (Double-Array Trie)结构由日本人JUN-ICHI AOE于1989年提出的，是Trie结构的压缩形式，仅用两个线性数组来表示Trie树，该结构有效结合了数字搜索树(Digital Search Tree)检索时间高效的特点和链式表示的Trie空间结构紧凑的特点。双数组Trie的本质是一个确定有限状态自动机（DFA），每个节点代表自动机的一个状态，根据变量不同，进行状态转移，当到达结束状态或无法转移时，完成一次查询操作。在双数组所有键中包含的字符之间的联系都是通过简单的数学加法运算表示，不仅提高了检索速度，而且省去了链式结构中使用的大量指针，节省了存储空间。</div><div class="line">                  ——《基于双数组Ｔｒｉｅ树算法的字典改进和实现》</div></pre></td></tr></table></figure>
+<p>DoubleArrayTire理解为两个数组base和check来维护tire树</p>
+<p><a href="http://www.hankcs.com/program/java/%E5%8F%8C%E6%95%B0%E7%BB%84trie%E6%A0%91doublearraytriejava%E5%AE%9E%E7%8E%B0.html" target="_blank" rel="external">文档</a></p>
+<p>##看到的分词器代码的简单理解</p>
+<p>中文分词器里面包含一个正向最大匹配分词器和一个逆向最大匹配分词器，但是先经过lucene分析器处理，然后通过两个分词器分割，选择最好的结果。</p>
+
+      
+    </div>
+    
+    <div class="article-info article-info-index">
+      
+      
+      
+
+      
+      <div class="clearfix"></div>
+    </div>
+      
+    
+  </div>
+  
+</article>
+
+
+
+
+
+
+
+  
+    <article id="post-elasticsearch插件" class="article article-type-post" itemscope itemprop="blogPost">
+  
+    <div class="article-meta">
+      <a href="/2017/08/11/elasticsearch插件/" class="article-date">
+  	<time datetime="2017-08-11T07:40:15.000Z" itemprop="datePublished">2017-08-11</time>
+</a>
+    </div>
+  
+  <div class="article-inner">
+    
+      <input type="hidden" class="isFancy" />
+    
+    
+      <header class="article-header">
+        
+  
+    <h1 itemprop="name">
+      <a class="article-title" href="/2017/08/11/elasticsearch插件/">
+        elasticsearch插件
+        
+      </a>
+    </h1>
+  
+
+      </header>
+      
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        <p><a href="http://cloud.51cto.com/art/201505/476450.htm" target="_blank" rel="external">五类Elasticsearch扩展性插件推荐</a></p>
+<h2 id="小小搬运工"><a href="#小小搬运工" class="headerlink" title="小小搬运工"></a>小小搬运工</h2><p><a href="http://blog.csdn.net/whxaing2011/article/details/18237733" target="_blank" rel="external">ElasticSearch的安装和相关插件的安装</a></p>
+<p>目前plugin 出错</p>
+
+      
+    </div>
+    
+    <div class="article-info article-info-index">
+      
+      
+      
+
+      
+      <div class="clearfix"></div>
+    </div>
+      
+    
+  </div>
+  
+</article>
+
+
+
+
+
+
+
+  
     <article id="post-elasticsearch" class="article article-type-post" itemscope itemprop="blogPost">
   
     <div class="article-meta">
