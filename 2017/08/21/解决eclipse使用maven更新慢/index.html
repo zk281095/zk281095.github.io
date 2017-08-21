@@ -1,0 +1,307 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="utf-8">
+  
+  <title>解决Eclipse使用Maven更新慢的问题 | Kai&#39;sBlog</title>
+
+  <!-- keywords -->
+  
+
+  <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+  <meta name="description" content="参考文档 开发过程中在pom.xml中添加pom的时候，默认是需要从中央仓库中下载，但是下载的速度是非常慢的，超过一定的时间可能就觉得是eclipse卡死了。解决办法是在maven中添加阿里的镜像。具体的操作步骤是：1.找到maven安装目录下conf文件夹下的settings.xml文件2.在mirrors中添加阿里的镜像 123456789101112131415161718192021222">
+<meta property="og:type" content="article">
+<meta property="og:title" content="解决Eclipse使用Maven更新慢的问题">
+<meta property="og:url" content="http://zk281095.github.io/2017/08/21/解决eclipse使用maven更新慢/index.html">
+<meta property="og:site_name" content="Kai&#39;sBlog">
+<meta property="og:description" content="参考文档 开发过程中在pom.xml中添加pom的时候，默认是需要从中央仓库中下载，但是下载的速度是非常慢的，超过一定的时间可能就觉得是eclipse卡死了。解决办法是在maven中添加阿里的镜像。具体的操作步骤是：1.找到maven安装目录下conf文件夹下的settings.xml文件2.在mirrors中添加阿里的镜像 123456789101112131415161718192021222">
+<meta property="og:updated_time" content="2017-08-21T09:02:31.936Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="解决Eclipse使用Maven更新慢的问题">
+<meta name="twitter:description" content="参考文档 开发过程中在pom.xml中添加pom的时候，默认是需要从中央仓库中下载，但是下载的速度是非常慢的，超过一定的时间可能就觉得是eclipse卡死了。解决办法是在maven中添加阿里的镜像。具体的操作步骤是：1.找到maven安装目录下conf文件夹下的settings.xml文件2.在mirrors中添加阿里的镜像 123456789101112131415161718192021222">
+  
+    <link rel="alternative" href="/atom.xml" title="Kai&#39;sBlog" type="application/atom+xml">
+  
+  
+    <link rel="icon" href="https://gss0.baidu.com/-Po3dSag_xI4khGko9WTAnF6hhy/zhidao/pic/item/4afbfbedab64034f236c6fd6adc379310b551db8.jpg">
+  
+  <link rel="stylesheet" href="/css/style.css">
+  
+  
+
+  <script src="//cdn.bootcss.com/require.js/2.3.2/require.min.js"></script>
+  <script src="//cdn.bootcss.com/jquery/3.1.1/jquery.min.js"></script>
+
+  
+</head>
+<body>
+  <div id="container">
+    <div id="particles-js"></div>
+    <div class="left-col">
+    <div class="overlay"></div>
+<div class="intrude-less">
+	<header id="header" class="inner">
+		<a href="/" class="profilepic">
+			
+			<img lazy-src="https://gss0.baidu.com/-Po3dSag_xI4khGko9WTAnF6hhy/zhidao/pic/item/4afbfbedab64034f236c6fd6adc379310b551db8.jpg" class="js-avatar">
+			
+		</a>
+
+		<hgroup>
+		  <h1 class="header-author"><a href="/">Kai</a></h1>
+		</hgroup>
+
+		
+
+		
+			<div class="switch-btn">
+				<div class="icon">
+					<div class="icon-ctn">
+						<div class="icon-wrap icon-house" data-idx="0">
+							<div class="birdhouse"></div>
+							<div class="birdhouse_holes"></div>
+						</div>
+						<div class="icon-wrap icon-ribbon hide" data-idx="1">
+							<div class="ribbon"></div>
+						</div>
+						
+						<div class="icon-wrap icon-link hide" data-idx="2">
+							<div class="loopback_l"></div>
+							<div class="loopback_r"></div>
+						</div>
+						
+						
+					</div>
+					
+				</div>
+				<div class="tips-box hide">
+					<div class="tips-arrow"></div>
+					<ul class="tips-inner">
+						<li>菜单</li>
+						<li>标签</li>
+						
+						<li>友情链接</li>
+						
+						
+					</ul>
+				</div>
+			</div>
+		
+
+		<div class="switch-area">
+			<div class="switch-wrap">
+				<section class="switch-part switch-part1">
+					<nav class="header-menu">
+						<ul>
+						
+							<li><a href="/">主页</a></li>
+				        
+							<li><a href="/archives">所有文章</a></li>
+				        
+						</ul>
+					</nav>
+					<nav class="header-nav">
+						<div class="social">
+							
+						</div>
+					</nav>
+				</section>
+				
+				
+				<section class="switch-part switch-part2">
+					<div class="widget tagcloud" id="js-tagcloud">
+						
+					</div>
+				</section>
+				
+				
+				
+				<section class="switch-part switch-part3">
+					<div id="js-friends">
+					
+			          <a target="_blank" class="main-nav-link switch-friends-link" href="https://github.com/smackgg/hexo-theme-smackdown">smackdown</a>
+			        
+			        </div>
+				</section>
+				
+
+				
+			</div>
+		</div>
+	</header>				
+</div>
+    </div>
+    <div class="mid-col">
+      <nav id="mobile-nav">
+  	<div class="overlay">
+  		<div class="slider-trigger"></div>
+  		<h1 class="header-author js-mobile-header hide">Kai</h1>
+  	</div>
+	<div class="intrude-less">
+		<header id="header" class="inner">
+			<div class="profilepic">
+				<img lazy-src="https://gss0.baidu.com/-Po3dSag_xI4khGko9WTAnF6hhy/zhidao/pic/item/4afbfbedab64034f236c6fd6adc379310b551db8.jpg" class="js-avatar">
+			</div>
+			<hgroup>
+			  <h1 class="header-author">Kai</h1>
+			</hgroup>
+			
+			<nav class="header-menu">
+				<ul>
+				
+					<li><a href="/">主页</a></li>
+		        
+					<li><a href="/archives">所有文章</a></li>
+		        
+		        <div class="clearfix"></div>
+				</ul>
+			</nav>
+			<nav class="header-nav">
+				<div class="social">
+					
+				</div>
+			</nav>
+		</header>				
+	</div>
+</nav>
+      <div class="body-wrap"><article id="post-解决eclipse使用maven更新慢" class="article article-type-post" itemscope itemprop="blogPost">
+  
+    <div class="article-meta">
+      <a href="/2017/08/21/解决eclipse使用maven更新慢/" class="article-date">
+  	<time datetime="2017-08-21T08:55:15.000Z" itemprop="datePublished">2017-08-21</time>
+</a>
+    </div>
+  
+  <div class="article-inner">
+    
+      <input type="hidden" class="isFancy" />
+    
+    
+      <header class="article-header">
+        
+  
+    <h1 class="article-title" itemprop="name">
+      解决Eclipse使用Maven更新慢的问题
+      
+    </h1>
+  
+
+      </header>
+      
+      <div class="article-info article-info-post">
+        
+        
+
+        
+        <div class="clearfix"></div>
+      </div>
+      
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        <p>参考<a href="http://blog.csdn.net/zt_fucker/article/details/59057591" target="_blank" rel="external">文档</a></p>
+<p>开发过程中在pom.xml中添加pom的时候，默认是需要从中央仓库中下载，但是下载的速度是非常慢的，超过一定的时间可能就觉得是eclipse卡死了。<br>解决办法是在maven中添加阿里的镜像。<br>具体的操作步骤是：<br>1.找到maven安装目录下conf文件夹下的settings.xml文件<br>2.在mirrors中添加阿里的镜像</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div><div class="line">24</div><div class="line">25</div><div class="line">26</div><div class="line">27</div><div class="line">28</div><div class="line">29</div><div class="line">30</div><div class="line">31</div><div class="line">32</div><div class="line">33</div><div class="line">34</div><div class="line">35</div><div class="line">36</div><div class="line">37</div><div class="line">38</div><div class="line">39</div><div class="line">40</div><div class="line">41</div><div class="line">42</div></pre></td><td class="code"><pre><div class="line">&lt;mirrors&gt;</div><div class="line">   &lt;!-- mirror</div><div class="line">    | Specifies a repository mirror site to use instead of a given repository. The repository that</div><div class="line">    | this mirror serves has an ID that matches the mirrorOf element of this mirror. IDs are used</div><div class="line">    | <span class="keyword">for</span> inheritance and direct lookup purposes, and must be unique across the <span class="built_in">set</span> of mirrors.</div><div class="line">    |</div><div class="line">   &lt;mirror&gt;</div><div class="line">     &lt;id&gt;mirrorId&lt;/id&gt;</div><div class="line">     &lt;mirrorOf&gt;repositoryId&lt;/mirrorOf&gt;</div><div class="line">     &lt;name&gt;Human Readable Name <span class="keyword">for</span> this Mirror.&lt;/name&gt;</div><div class="line">     &lt;url&gt;http://my.repository.com/repo/path&lt;/url&gt;</div><div class="line">   &lt;/mirror&gt;</div><div class="line">    --&gt;</div><div class="line"> &lt;mirror&gt;</div><div class="line">   &lt;id&gt;alimaven&lt;/id&gt;</div><div class="line">   &lt;name&gt;aliyun maven&lt;/name&gt;</div><div class="line">   &lt;url&gt;http://maven.aliyun.com/nexus/content/groups/public/&lt;/url&gt;</div><div class="line">   &lt;mirrorOf&gt;central&lt;/mirrorOf&gt;</div><div class="line"> &lt;/mirror&gt;</div><div class="line"></div><div class="line"> &lt;mirror&gt; </div><div class="line">   &lt;id&gt;uk&lt;/id&gt;  </div><div class="line">   &lt;mirrorOf&gt;central&lt;/mirrorOf&gt;  </div><div class="line">   &lt;name&gt;Human Readable Name <span class="keyword">for</span> this Mirror.&lt;/name&gt;  </div><div class="line">   &lt;url&gt;http://uk.maven.org/maven2/&lt;/url&gt; </div><div class="line"> &lt;/mirror&gt;</div><div class="line"></div><div class="line">  &lt;mirror&gt;</div><div class="line">   &lt;id&gt;CN&lt;/id&gt;</div><div class="line">   &lt;name&gt;OSChina Central&lt;/name&gt;</div><div class="line">   &lt;url&gt;http://maven.oschina.net/content/groups/public/&lt;/url&gt;</div><div class="line">   &lt;mirrorOf&gt;central&lt;/mirrorOf&gt;</div><div class="line"> &lt;/mirror&gt;</div><div class="line"></div><div class="line"> &lt;mirror&gt;</div><div class="line">   &lt;id&gt;nexus&lt;/id&gt;</div><div class="line">   &lt;name&gt;internal nexus repository&lt;/name&gt;</div><div class="line">   &lt;!-- &lt;url&gt;http://192.168.1.100:8081/nexus/content/groups/public/&lt;/url&gt;--&gt;</div><div class="line">   &lt;url&gt;http://repo.maven.apache.org/maven2&lt;/url&gt;</div><div class="line">   &lt;mirrorOf&gt;central&lt;/mirrorOf&gt;</div><div class="line"> &lt;/mirror&gt;</div><div class="line"> &lt;/mirrors&gt;</div></pre></td></tr></table></figure>
+<p> ##以下方式未测试</p>
+<p> 参考<a href="http://www.cnblogs.com/flying607/p/6223148.html" target="_blank" rel="external">文档</a></p>
+<p>方法二：直接在pom.xml上改<br><figure class="highlight bash"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div><div class="line">24</div><div class="line">25</div><div class="line">26</div><div class="line">27</div><div class="line">28</div><div class="line">29</div></pre></td><td class="code"><pre><div class="line">&lt;repositories&gt;</div><div class="line">       &lt;repository&gt;</div><div class="line">           &lt;id&gt;aliyun&lt;/id&gt;</div><div class="line">           &lt;name&gt;aliyun&lt;/name&gt;</div><div class="line">           &lt;url&gt;http://maven.aliyun.com/nexus/content/groups/public/&lt;/url&gt;</div><div class="line">           &lt;layout&gt;default&lt;/layout&gt;</div><div class="line">           &lt;releases&gt;</div><div class="line">               &lt;enabled&gt;<span class="literal">true</span>&lt;/enabled&gt;</div><div class="line">               &lt;updatePolicy&gt;never&lt;/updatePolicy&gt;</div><div class="line">           &lt;/releases&gt;</div><div class="line">           &lt;snapshots&gt;</div><div class="line">               &lt;enabled&gt;<span class="literal">true</span>&lt;/enabled&gt;</div><div class="line">               &lt;updatePolicy&gt;never&lt;/updatePolicy&gt;</div><div class="line">           &lt;/snapshots&gt;</div><div class="line">       &lt;/repository&gt;</div><div class="line">   &lt;/repositories&gt;</div><div class="line">   &lt;pluginRepositories&gt;</div><div class="line">           &lt;pluginRepository&gt;</div><div class="line">           &lt;id&gt;aliyun&lt;/id&gt;</div><div class="line">           &lt;name&gt;aliyun&lt;/name&gt;</div><div class="line">           &lt;url&gt;http://maven.aliyun.com/nexus/content/groups/public/&lt;/url&gt;</div><div class="line">           &lt;releases&gt;</div><div class="line">               &lt;enabled&gt;<span class="literal">true</span>&lt;/enabled&gt;</div><div class="line">           &lt;/releases&gt;</div><div class="line">           &lt;snapshots&gt;</div><div class="line">               &lt;enabled&gt;<span class="literal">false</span>&lt;/enabled&gt;</div><div class="line">           &lt;/snapshots&gt;</div><div class="line">           &lt;/pluginRepository&gt;</div><div class="line">       &lt;/pluginRepositories&gt;</div></pre></td></tr></table></figure></p>
+<p>加上这两段即可。</p>
+<p>关于repository和mirror的关系，maven会先从repository读仓库信息，然后去settings.xml中找一下mirror里面有没有同名的，如果有就用同名mirror的地址，没有则使用repository中的地址。</p>
+
+      
+    </div>
+    
+  </div>
+  
+    
+<nav id="article-nav">
+  
+  
+    <a href="/2017/08/14/中文分词/" id="article-nav-older" class="article-nav-link-wrap">
+      <div class="article-nav-title">中文分词学习ing</div>
+      <strong class="article-nav-caption">&gt;</strong>
+    </a>
+  
+</nav>
+
+  
+</article>
+
+
+<div class="ds-share share" data-thread-key="解决eclipse使用maven更新慢" data-title="解决Eclipse使用Maven更新慢的问题" data-url="http://zk281095.github.io/2017/08/21/解决eclipse使用maven更新慢/"  data-images="https://gss0.baidu.com/-Po3dSag_xI4khGko9WTAnF6hhy/zhidao/pic/item/4afbfbedab64034f236c6fd6adc379310b551db8.jpg" data-content="解决Eclipse使用Maven更新慢的问题">
+    <div class="ds-share-inline">
+      <ul  class="ds-share-icons-16">
+      	<li data-toggle="ds-share-icons-more"><a class="ds-more" href="javascript:void(0);">分享到：</a></li>
+        <li><a class="ds-weibo" href="javascript:void(0);" data-service="weibo">微博</a></li>
+        <li><a class="ds-qzone" href="javascript:void(0);" data-service="qzone">QQ空间</a></li>
+        <li><a class="ds-qqt" href="javascript:void(0);" data-service="qqt">腾讯微博</a></li>
+        <li><a class="ds-wechat" href="javascript:void(0);" data-service="wechat">微信</a></li>
+      </ul>
+      <div class="ds-share-icons-more">
+      </div>
+    </div>
+ </div>
+ 
+
+
+
+
+
+</div>
+      <footer id="footer">
+  <div class="outer">
+    <div id="footer-info">
+      <div class="footer-left">
+        &copy; 2017 Kai
+      </div>
+        <div class="footer-right">
+          <a href="http://hexo.io/" target="_blank">Hexo</a>  Theme <a href="https://github.com/smackgg/hexo-theme-smackdown" target="_blank">Smackdown</a>
+        </div>
+    </div>
+  </div>
+</footer>
+    </div>
+    
+  <link rel="stylesheet" href="/fancybox/jquery.fancybox.css">
+
+
+<script>
+	var yiliaConfig = {
+		fancybox: true,
+		mathjax: true,
+		animate: true,
+		isHome: false,
+		isPost: true,
+		isArchive: false,
+		isTag: false,
+		isCategory: false,
+		open_in_new: false
+	}
+</script>
+<script src="/js/main.js"></script>
+
+
+
+<script type="text/x-mathjax-config">
+MathJax.Hub.Config({
+    tex2jax: {
+        inlineMath: [ ['$','$'], ["\\(","\\)"]  ],
+        processEscapes: true,
+        skipTags: ['script', 'noscript', 'style', 'textarea', 'pre', 'code']
+    }
+});
+
+MathJax.Hub.Queue(function() {
+    var all = MathJax.Hub.getAllJax(), i;
+    for(i=0; i < all.length; i += 1) {
+        all[i].SourceElement().parentNode.className += ' has-jax';                 
+    }       
+});
+</script>
+
+<script src="//cdn.bootcss.com/mathjax/2.7.0/MathJax.js"></script>
+
+
+  </div>
+</body>
+</html>

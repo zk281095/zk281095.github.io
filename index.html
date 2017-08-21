@@ -162,6 +162,68 @@
 </nav>
       <div class="body-wrap">
   
+    <article id="post-解决eclipse使用maven更新慢" class="article article-type-post" itemscope itemprop="blogPost">
+  
+    <div class="article-meta">
+      <a href="/2017/08/21/解决eclipse使用maven更新慢/" class="article-date">
+  	<time datetime="2017-08-21T08:55:15.000Z" itemprop="datePublished">2017-08-21</time>
+</a>
+    </div>
+  
+  <div class="article-inner">
+    
+      <input type="hidden" class="isFancy" />
+    
+    
+      <header class="article-header">
+        
+  
+    <h1 itemprop="name">
+      <a class="article-title" href="/2017/08/21/解决eclipse使用maven更新慢/">
+        解决Eclipse使用Maven更新慢的问题
+        
+      </a>
+    </h1>
+  
+
+      </header>
+      
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        <p>参考<a href="http://blog.csdn.net/zt_fucker/article/details/59057591" target="_blank" rel="external">文档</a></p>
+<p>开发过程中在pom.xml中添加pom的时候，默认是需要从中央仓库中下载，但是下载的速度是非常慢的，超过一定的时间可能就觉得是eclipse卡死了。<br>解决办法是在maven中添加阿里的镜像。<br>具体的操作步骤是：<br>1.找到maven安装目录下conf文件夹下的settings.xml文件<br>2.在mirrors中添加阿里的镜像</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div><div class="line">24</div><div class="line">25</div><div class="line">26</div><div class="line">27</div><div class="line">28</div><div class="line">29</div><div class="line">30</div><div class="line">31</div><div class="line">32</div><div class="line">33</div><div class="line">34</div><div class="line">35</div><div class="line">36</div><div class="line">37</div><div class="line">38</div><div class="line">39</div><div class="line">40</div><div class="line">41</div><div class="line">42</div></pre></td><td class="code"><pre><div class="line">&lt;mirrors&gt;</div><div class="line">   &lt;!-- mirror</div><div class="line">    | Specifies a repository mirror site to use instead of a given repository. The repository that</div><div class="line">    | this mirror serves has an ID that matches the mirrorOf element of this mirror. IDs are used</div><div class="line">    | <span class="keyword">for</span> inheritance and direct lookup purposes, and must be unique across the <span class="built_in">set</span> of mirrors.</div><div class="line">    |</div><div class="line">   &lt;mirror&gt;</div><div class="line">     &lt;id&gt;mirrorId&lt;/id&gt;</div><div class="line">     &lt;mirrorOf&gt;repositoryId&lt;/mirrorOf&gt;</div><div class="line">     &lt;name&gt;Human Readable Name <span class="keyword">for</span> this Mirror.&lt;/name&gt;</div><div class="line">     &lt;url&gt;http://my.repository.com/repo/path&lt;/url&gt;</div><div class="line">   &lt;/mirror&gt;</div><div class="line">    --&gt;</div><div class="line"> &lt;mirror&gt;</div><div class="line">   &lt;id&gt;alimaven&lt;/id&gt;</div><div class="line">   &lt;name&gt;aliyun maven&lt;/name&gt;</div><div class="line">   &lt;url&gt;http://maven.aliyun.com/nexus/content/groups/public/&lt;/url&gt;</div><div class="line">   &lt;mirrorOf&gt;central&lt;/mirrorOf&gt;</div><div class="line"> &lt;/mirror&gt;</div><div class="line"></div><div class="line"> &lt;mirror&gt; </div><div class="line">   &lt;id&gt;uk&lt;/id&gt;  </div><div class="line">   &lt;mirrorOf&gt;central&lt;/mirrorOf&gt;  </div><div class="line">   &lt;name&gt;Human Readable Name <span class="keyword">for</span> this Mirror.&lt;/name&gt;  </div><div class="line">   &lt;url&gt;http://uk.maven.org/maven2/&lt;/url&gt; </div><div class="line"> &lt;/mirror&gt;</div><div class="line"></div><div class="line">  &lt;mirror&gt;</div><div class="line">   &lt;id&gt;CN&lt;/id&gt;</div><div class="line">   &lt;name&gt;OSChina Central&lt;/name&gt;</div><div class="line">   &lt;url&gt;http://maven.oschina.net/content/groups/public/&lt;/url&gt;</div><div class="line">   &lt;mirrorOf&gt;central&lt;/mirrorOf&gt;</div><div class="line"> &lt;/mirror&gt;</div><div class="line"></div><div class="line"> &lt;mirror&gt;</div><div class="line">   &lt;id&gt;nexus&lt;/id&gt;</div><div class="line">   &lt;name&gt;internal nexus repository&lt;/name&gt;</div><div class="line">   &lt;!-- &lt;url&gt;http://192.168.1.100:8081/nexus/content/groups/public/&lt;/url&gt;--&gt;</div><div class="line">   &lt;url&gt;http://repo.maven.apache.org/maven2&lt;/url&gt;</div><div class="line">   &lt;mirrorOf&gt;central&lt;/mirrorOf&gt;</div><div class="line"> &lt;/mirror&gt;</div><div class="line"> &lt;/mirrors&gt;</div></pre></td></tr></table></figure>
+<p> ##以下方式未测试</p>
+<p> 参考<a href="http://www.cnblogs.com/flying607/p/6223148.html" target="_blank" rel="external">文档</a></p>
+<p>方法二：直接在pom.xml上改<br><figure class="highlight bash"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div><div class="line">24</div><div class="line">25</div><div class="line">26</div><div class="line">27</div><div class="line">28</div><div class="line">29</div></pre></td><td class="code"><pre><div class="line">&lt;repositories&gt;</div><div class="line">       &lt;repository&gt;</div><div class="line">           &lt;id&gt;aliyun&lt;/id&gt;</div><div class="line">           &lt;name&gt;aliyun&lt;/name&gt;</div><div class="line">           &lt;url&gt;http://maven.aliyun.com/nexus/content/groups/public/&lt;/url&gt;</div><div class="line">           &lt;layout&gt;default&lt;/layout&gt;</div><div class="line">           &lt;releases&gt;</div><div class="line">               &lt;enabled&gt;<span class="literal">true</span>&lt;/enabled&gt;</div><div class="line">               &lt;updatePolicy&gt;never&lt;/updatePolicy&gt;</div><div class="line">           &lt;/releases&gt;</div><div class="line">           &lt;snapshots&gt;</div><div class="line">               &lt;enabled&gt;<span class="literal">true</span>&lt;/enabled&gt;</div><div class="line">               &lt;updatePolicy&gt;never&lt;/updatePolicy&gt;</div><div class="line">           &lt;/snapshots&gt;</div><div class="line">       &lt;/repository&gt;</div><div class="line">   &lt;/repositories&gt;</div><div class="line">   &lt;pluginRepositories&gt;</div><div class="line">           &lt;pluginRepository&gt;</div><div class="line">           &lt;id&gt;aliyun&lt;/id&gt;</div><div class="line">           &lt;name&gt;aliyun&lt;/name&gt;</div><div class="line">           &lt;url&gt;http://maven.aliyun.com/nexus/content/groups/public/&lt;/url&gt;</div><div class="line">           &lt;releases&gt;</div><div class="line">               &lt;enabled&gt;<span class="literal">true</span>&lt;/enabled&gt;</div><div class="line">           &lt;/releases&gt;</div><div class="line">           &lt;snapshots&gt;</div><div class="line">               &lt;enabled&gt;<span class="literal">false</span>&lt;/enabled&gt;</div><div class="line">           &lt;/snapshots&gt;</div><div class="line">           &lt;/pluginRepository&gt;</div><div class="line">       &lt;/pluginRepositories&gt;</div></pre></td></tr></table></figure></p>
+<p>加上这两段即可。</p>
+<p>关于repository和mirror的关系，maven会先从repository读仓库信息，然后去settings.xml中找一下mirror里面有没有同名的，如果有就用同名mirror的地址，没有则使用repository中的地址。</p>
+
+      
+    </div>
+    
+    <div class="article-info article-info-index">
+      
+      
+      
+
+      
+      <div class="clearfix"></div>
+    </div>
+      
+    
+  </div>
+  
+</article>
+
+
+
+
+
+
+
+  
     <article id="post-中文分词" class="article article-type-post" itemscope itemprop="blogPost">
   
     <div class="article-meta">
