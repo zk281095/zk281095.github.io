@@ -254,6 +254,7 @@
     <div class="article-entry" itemprop="articleBody">
       
         <h2 id="stanford-nlp测试使用"><a href="#stanford-nlp测试使用" class="headerlink" title="stanford nlp测试使用"></a>stanford nlp测试使用</h2><p><strong><em>stanford-corenlp-3.8.0.jar 导入时引入此包，其他的-javadoc/models/sources，不对。</em></strong></p>
+<p>进行中文分词前需要进行配置，字典等等一些内容<br><a href="http://blog.csdn.net/macanv/article/details/72993873?utm_source=itdadao&amp;utm_medium=referral" target="_blank" rel="external">Stanford CoreNLP 进行中文分词</a></p>
 <p>##Tire树</p>
 <p><strong><em>Tire树分词是词典树分词，将词建立树，然后分词时顺序读取句子字符匹配，完成分词。</em></strong></p>
 <p>用Trie树词典分词就是按照句子的字符顺序从root往下走，每走到一个结束节点则分出一个词。中途遇到的中继节点统统忽略，这种方式也称“最长匹配”，是一种很武断的方式。<br>要想提高分词效果，就必须引入条件概率（隐马尔可夫模型），这就是Ansj分词的使命吧。</p>
